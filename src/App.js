@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Router from './Router/routes';
+import './App.css';
+import { Component } from 'react';
+import APIService from './Services/ApiService';
+
+class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      users: [],
+      filteredUsers: [],
+      visibleUsers: [],
+      loading: true,
+    }
+  }
+  componentDidMount() {
+    this.getUsers();
+  }
+
+
+  getUsers = () => {
+    APIService.GetUsersData().then(data => 
+      this.setState({ users: JSON.parse(data) }, () => this.setState({ loading: false}))
+    )
+  }
+
+  setUsers = (users) => {
+    this.setState({filteredUsers: users});
+  }
+
+  setVisibleUsers = (users) => {
+    this.setState({ visibleUsers: users})
+  }
+
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router users = {this.state.users} loading = {this.state.loading} filteredUsers = {this.state.filteredUsers} setUsers = {this.setUsers} visibleUsers = {this.state.visibleUsers} setVisibleUsers={this.setVisibleUsers} />
   );
+  }
 }
 
 export default App;
