@@ -22,7 +22,6 @@ const   HomeRoute = (props) => {
         setSearchInput(e.target.value);
     }
 
-    console.log(props.filteredUsers.length,  props.visibleUsers.length)
     return (        
         <div key={props.Component.name}>
             {!props.loading ? <><Header showTabs />

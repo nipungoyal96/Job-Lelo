@@ -47,8 +47,8 @@ const UserPage = (props) => {
     let isRejectedUser;
 
     if(user) {
-         isSelectedUser = JSON.parse(localStorage.getItem('selectedUsers'))?.indexOf(user.id) !== -1 && true ;
-         isRejectedUser = JSON.parse(localStorage.getItem('rejectedUsers'))?.indexOf(user.id) !== -1 && true ;
+         isSelectedUser = localStorage.getItem('selectedUsers') && JSON.parse(localStorage.getItem('selectedUsers'))?.indexOf(user.id) !== -1 && true ;
+         isRejectedUser = localStorage.getItem('rejectedUsers') &&JSON.parse(localStorage.getItem('rejectedUsers'))?.indexOf(user.id) !== -1 && true ;
     }
     
 
